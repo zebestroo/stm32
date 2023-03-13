@@ -85,7 +85,7 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   /* USER CODE BEGIN 2 */
-  HAL_Delay(5000);
+
   HAL_SYSTICK_Config(HAL_RCC_GetHCLKFreq()/1000);
 
   /* USER CODE END 2 */
@@ -94,6 +94,7 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+	  HAL_Delay(5000);
     /* USER CODE END WHILE */
 	  my_handler();
     /* USER CODE BEGIN 3 */
@@ -187,7 +188,6 @@ void HAL_SYSTICK_Callback(void){
 void my_handler(void){
 	HAL_IncTick();
 	HAL_SYSTICK_IRQHandler();
-	while(1);
 }
 
 
