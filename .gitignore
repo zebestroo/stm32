@@ -74,6 +74,10 @@ dkms.conf
 
 # Executables
 
+
+### Assembler ###
+*.bc
+
 ### Vim ###
 # Swap
 [._]*.s[a-v][a-z]
