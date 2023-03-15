@@ -94,7 +94,6 @@ int main(void)
 
 
   /* USER CODE END 2 */
-  //HAL_GPIO_WritePin(GPIOC, GPIO_PIN_8, GPIO_PIN_SET);
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
@@ -181,19 +180,6 @@ static void MX_GPIO_Init(void)
 
 /* USER CODE BEGIN 4 */
 /*
-void HAL_SYSTICK_Callback(void){
-	for(int i = 0; i < 6; i++){
-		HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_8);
-		HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_9);
-		HAL_Delay(100);
-	}
-}
-
-void my_handler(void){
-	HAL_IncTick();
-	HAL_SYSTICK_IRQHandler();
-}
-*/
 
 
 /* USER CODE END 4 */
