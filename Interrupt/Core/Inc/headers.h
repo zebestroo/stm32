@@ -6,4 +6,5 @@
 
 void my_handler(void);
 void configure_ll_timer(int ticks);
-void action_timer_1ms_step(void);
+void configure_hal_timer(int ticks);
+void action_timer_1ms_step(int ticks);

@@ -5,8 +5,8 @@
 
 int counter = TIMER_TICKS;
 
-void action_timer_1ms_step(void){
-	SysTick_Config(48000);
+void action_timer_1ms_step(int ticks){
+	SysTick_Config(ticks);
 }
 
 void timer_1ms_handler(void){
@@ -22,11 +22,13 @@ void HAL_SYSTICK_Callback(void){
 	}
 }
 
-
 void configure_ll_timer(int ticks){
 	LL_InitTick(HAL_RCC_GetHCLKFreq(), ticks);
 	SysTick->CTRL = SysTick->CTRL | SysTick_CTRL_TICKINT_Msk;
 }
 
+void configure_hal_timer(int ticks){
+	HAL_SYSTICK_Config(ticks);
+}
 
 

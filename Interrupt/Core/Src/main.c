@@ -19,6 +19,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "headers.h"
+//#include "blink.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
@@ -84,8 +85,13 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   /* USER CODE BEGIN 2 */
-  //action_timer_1ms_step();
-  configure_ll_timer(1000);
+
+
+  action_timer_1ms_step(48000);
+  //configure_ll_timer(10000);
+  //configure_hal_timer(8000);
+
+
   /* USER CODE END 2 */
   //HAL_GPIO_WritePin(GPIOC, GPIO_PIN_8, GPIO_PIN_SET);
   /* Infinite loop */
@@ -93,7 +99,6 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
