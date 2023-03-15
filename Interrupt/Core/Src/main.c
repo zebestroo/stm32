@@ -18,6 +18,7 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "headers.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
@@ -48,7 +49,6 @@
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 /* USER CODE BEGIN PFP */
-void my_handler(void);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -63,7 +63,6 @@ void my_handler(void);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -85,18 +84,16 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   /* USER CODE BEGIN 2 */
-
-  HAL_SYSTICK_Config(HAL_RCC_GetHCLKFreq()/1000);
-
+  //action_timer_1ms_step();
+  configure_ll_timer(1000);
   /* USER CODE END 2 */
-
+  //HAL_GPIO_WritePin(GPIOC, GPIO_PIN_8, GPIO_PIN_SET);
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  HAL_Delay(5000);
     /* USER CODE END WHILE */
-	  my_handler();
+
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -176,7 +173,7 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-
+/*
 void HAL_SYSTICK_Callback(void){
 	for(int i = 0; i < 6; i++){
 		HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_8);
@@ -189,6 +186,7 @@ void my_handler(void){
 	HAL_IncTick();
 	HAL_SYSTICK_IRQHandler();
 }
+*/
 
 
 /* USER CODE END 4 */
