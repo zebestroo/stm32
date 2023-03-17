@@ -1,0 +1,3 @@
+#define TIMER_MODE 2
+#define MODE_EXECUTE 0
+#define SYSTICK_PRESCALER 48000

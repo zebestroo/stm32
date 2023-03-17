@@ -1,8 +1,7 @@
-#define MODE_EXECUTE 1
-
+#include "const.h"
 
 #if MODE_EXECUTE == 0
-#include "stm32f0xx_hal_gpio.h"
+#include "stm32f0xx_hal.h"
 
 #elif MODE_EXECUTE == 1
 #include "stm32f0xx_ll_gpio.h"
@@ -15,4 +14,4 @@
 #endif
 
 
-void blink(void);
+void blink(GPIO_TypeDef * GPIOx, uint16_t GPIO_Pin, int ticks);

@@ -22,6 +22,13 @@ void HAL_SYSTICK_Callback(void){
 	}
 }
 
+/*
+void HAL_SYSTICK_Callback(void){
+	//HAL_Delay(100);
+	HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_8);
+}
+*/
+
 void configure_ll_timer(int ticks){
 	LL_InitTick(HAL_RCC_GetHCLKFreq(), ticks);
 	SysTick->CTRL = SysTick->CTRL | SysTick_CTRL_TICKINT_Msk;
@@ -30,5 +37,10 @@ void configure_ll_timer(int ticks){
 void configure_hal_timer(int ticks){
 	HAL_SYSTICK_Config(ticks);
 }
+
+void hal_timer_with_delay(int ticks){
+	HAL_SYSTICK_Config(HAL_RCC_GetHCLKFreq()/ticks);
+}
+
 
 

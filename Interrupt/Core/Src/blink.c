@@ -1,21 +1,24 @@
 #include "blink.h"
+#include "delay.h"
 
 
-void blink(void){
+void blink(GPIO_TypeDef * GPIOx, uint16_t GPIO_Pin, int ticks){
 
-#if MODE_EXECUTE == 3
-	  HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_8);	// Used HAL lib
-	  HAL_Delay(500);
+#if MODE_EXECUTE == 0
+	  HAL_GPIO_TogglePin(GPIOx, GPIO_Pin);	// Used HAL lib
+	  my_timer_delay(ticks);
+	  //HAL_Delay(1000);
 
 #elif MODE_EXECUTE == 1
-	  LL_GPIO_TogglePin(GPIOC, LL_GPIO_PIN_8);	// Used Low-layer lib
-	  HAL_Delay(2000);
+	  LL_GPIO_TogglePin(GPIOx, GPIO_Pin);	// Used Low-layer lib
+	  my_timer_delay(ticks);
 
 #elif MODE_EXECUTE == 2
-	  GPIOC->BSRR = GPIO_PIN_8 + GPIO_PIN_9;
-	  HAL_Delay(100);
-	  GPIOC->BRR = GPIO_PIN_8 + GPIO_PIN_9;
-	  HAL_Delay(100);
+	  GPIOx->BSRR = GPIO_Pin;
+	  my_timer_delay(ticks);
+	  GPIOx->BRR = GPIO_Pin;
+	  my_timer_delay(ticks);
+
 
 #endif
 }

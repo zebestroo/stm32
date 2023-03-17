@@ -20,6 +20,7 @@
 #include "main.h"
 #include "headers.h"
 #include "blink.h"
+#include "stm32f0xx_hal.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
@@ -84,14 +85,20 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+
   /* USER CODE BEGIN 2 */
-
-
+/*
+  HAL_SYSTICK_Config(HAL_RCC_GetHCLKFreq()/1000);
+  HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_8);
+  HAL_Delay(1000);
+  HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_8);
+  HAL_Delay(1000);
+*/
   //action_timer_1ms_step(48000);
   //configure_ll_timer(10000);
-  configure_hal_timer(8000);
-
-
+  //configure_hal_timer(8000);
+  //hal_timer_with_delay(120);
+  //action_timer_1ms_step(48000);
 
   /* USER CODE END 2 */
   /* Infinite loop */
@@ -99,7 +106,8 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-	  //blink();
+	  blink(GPIOC, GPIO_PIN_8, 1000);
+
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -179,7 +187,6 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-/*
 
 
 /* USER CODE END 4 */
