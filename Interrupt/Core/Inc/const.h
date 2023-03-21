@@ -1,3 +1,4 @@
-#define TIMER_MODE 2
-#define MODE_EXECUTE 0
+#define TIMER_MODE 5
+#define MODE_EXECUTE 3
 #define SYSTICK_PRESCALER 48000
+#define ACTION_TIMER = TIM3

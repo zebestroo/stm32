@@ -18,9 +18,8 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include "headers.h"
 #include "blink.h"
-#include "stm32f0xx_hal.h"
+
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
@@ -42,6 +41,7 @@
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
+//TIM_HandleTypeDef htim3;
 
 /* USER CODE BEGIN PV */
 
@@ -50,12 +50,13 @@
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
+//static void MX_TIM3_Init(void);
 /* USER CODE BEGIN PFP */
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
+//TIM_HandleTypeDef htim3;
 /* USER CODE END 0 */
 
 /**
@@ -85,15 +86,19 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
-
+  //MX_TIM3_Init();
   /* USER CODE BEGIN 2 */
 /*
-  HAL_SYSTICK_Config(HAL_RCC_GetHCLKFreq()/1000);
-  HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_8);
-  HAL_Delay(1000);
-  HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_8);
-  HAL_Delay(1000);
+  htim3.Instance = TIM3;
+  htim3.Init.Prescaler = 47999;
+  htim3.Init.Period = 499;
+
+  __HAL_RCC_TIM3_CLK_ENABLE();
+  HAL_NVIC_EnableIRQ(TIM3_IRQn);
+  HAL_TIM_Base_Init(&htim3);
+  HAL_TIM_Base_Start_IT(&htim3);
 */
+
   //action_timer_1ms_step(48000);
   //configure_ll_timer(10000);
   //configure_hal_timer(8000);
@@ -101,13 +106,16 @@ int main(void)
   //action_timer_1ms_step(48000);
 
   /* USER CODE END 2 */
+
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  //HAL_TIM_Base_Start_IT(&htim3);
+  blink(GPIOC, GPIO_PIN_8, 1000);
+  //HAL_TIM_Base_Start_IT(&htim3);
   while (1)
   {
     /* USER CODE END WHILE */
-	  blink(GPIOC, GPIO_PIN_8, 1000);
-
+	  //blink(GPIOC, GPIO_PIN_8, 500);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -152,6 +160,13 @@ void SystemClock_Config(void)
 }
 
 /**
+  * @brief TIM3 Initialization Function
+  * @param None
+  * @retval None
+  */
+
+
+/**
   * @brief GPIO Initialization Function
   * @param None
   * @retval None
@@ -188,6 +203,11 @@ static void MX_GPIO_Init(void)
 
 /* USER CODE BEGIN 4 */
 
+/*
+void TIM3_IRQHandler(void){
+	HAL_TIM_IRQHandler(&htim3);
+}
+*/
 
 /* USER CODE END 4 */
 

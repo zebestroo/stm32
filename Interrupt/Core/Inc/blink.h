@@ -9,6 +9,9 @@
 #elif MODE_EXECUTE == 2
 #include "stm32f0xx.h"
 
+#elif MODE_EXECUTE == 3
+#include "stm32f0xx.h"
+
 #else
 // TODO: Fail compilation
 #endif
