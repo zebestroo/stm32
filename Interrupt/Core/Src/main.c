@@ -20,6 +20,7 @@
 #include "main.h"
 #include "blink.h"
 
+
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
@@ -74,7 +75,20 @@ int main(void)
   HAL_Init();
 
   /* USER CODE BEGIN Init */
-
+  //TIM_Init_hal();
+#if TIMER_MODE == 0
+	SysTick_Config(SYSTICK_PRESCALER);
+#elif TIMER_MODE == 1
+	LL_InitTick(HAL_RCC_GetHCLKFreq(), 1000);
+#elif TIMER_MODE == 2
+	HAL_SYSTICK_Config(HAL_RCC_GetHCLKFreq()/1000);
+#elif TIMER_MODE == 3
+	  TIM_Init_hal();
+#elif TIMER_MODE == 4
+	  TIM_Init_ll();
+#elif TIMER_MODE == 5
+  TIM_Init_cmsis();
+#endif
   /* USER CODE END Init */
 
   /* Configure the system clock */
@@ -110,11 +124,13 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   //HAL_TIM_Base_Start_IT(&htim3);
-  blink(GPIOC, GPIO_PIN_8, 1000);
+  //blink(GPIOC, GPIO_PIN_8, 500);
   //HAL_TIM_Base_Start_IT(&htim3);
+
   while (1)
   {
     /* USER CODE END WHILE */
+	  blink(GPIOC, GPIO_PIN_8, 500);
 	  //blink(GPIOC, GPIO_PIN_8, 500);
     /* USER CODE BEGIN 3 */
   }

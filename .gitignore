@@ -101,3 +101,21 @@ tags
 [._]*.un~
 
 # End of https://www.toptal.com/developers/gitignore/api/c,c++,vim
+
+# Files
+
+Blink/*
+Timer/*
+Interrupt/Debug
+Interrupt/Drivers
+Interrupt/Core/Startup
+
+*.cproject
+*.ioc
+*.ld
+*.launch
+*.project
+*.mxproject
+*.settings
+*.metadata
+

@@ -1,5 +1,6 @@
 #include "blink.h"
 #include "delay.h"
+#include "led.h"
 
 
 void blink(GPIO_TypeDef * GPIOx, uint16_t GPIO_Pin, int ticks){
@@ -13,11 +14,16 @@ void blink(GPIO_TypeDef * GPIOx, uint16_t GPIO_Pin, int ticks){
 	  my_timer_delay(ticks);
 
 #elif MODE_EXECUTE == 2
+	  led_on(GPIOx, GPIO_Pin);
+	  HAL_Delay(ticks);
+	  led_off(GPIOx, GPIO_Pin);
+	  HAL_Delay(ticks);
+	  /*
 	  GPIOx->BSRR = GPIO_Pin;
 	  my_timer_delay(ticks);
 	  GPIOx->BRR = GPIO_Pin;
 	  my_timer_delay(ticks);
-
+	   */
 #elif MODE_EXECUTE == 3
 	  my_timer_delay(ticks);
 

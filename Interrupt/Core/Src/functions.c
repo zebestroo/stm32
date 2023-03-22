@@ -13,7 +13,7 @@ void timer_1ms_handler(void){
 	// Example code
 	HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_8);
 }
-
+/*
 void HAL_SYSTICK_Callback(void){
 	counter--;
 	if(counter == 0){
@@ -21,7 +21,7 @@ void HAL_SYSTICK_Callback(void){
 		counter = TIMER_TICKS;
 	}
 }
-
+*/
 /*
 void HAL_SYSTICK_Callback(void){
 	//HAL_Delay(100);
