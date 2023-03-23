@@ -34,6 +34,11 @@ void my_timer_delay(int ticks){
 	//htim3.Init.Period = ticks;
 	TIM3->ARR = ticks;
 	HAL_TIM_Base_Start_IT(&htim3);
+	/*
+	while(TIM3->CNT < ticks){
+
+	}
+	*/
 
 #elif TIMER_MODE == 4
 	LL_TIM_SetAutoReload(TIM3, ticks);

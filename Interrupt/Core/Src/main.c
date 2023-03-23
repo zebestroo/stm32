@@ -19,6 +19,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "blink.h"
+#include "button.h"
 
 
 /* Private includes ----------------------------------------------------------*/
@@ -102,6 +103,7 @@ int main(void)
   MX_GPIO_Init();
   //MX_TIM3_Init();
   /* USER CODE BEGIN 2 */
+  //GPIOC->ODR |= (1 << 9);
 /*
   htim3.Instance = TIM3;
   htim3.Init.Prescaler = 47999;
@@ -130,7 +132,8 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-	  blink(GPIOC, GPIO_PIN_8, 500);
+	  blink_button_period(1000);
+	  //blink(GPIOC, GPIO_PIN_8, 1000);
 	  //blink(GPIOC, GPIO_PIN_8, 500);
     /* USER CODE BEGIN 3 */
   }
