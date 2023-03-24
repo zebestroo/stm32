@@ -8,7 +8,7 @@
 
 #include "const.h"
 
-TIM_HandleTypeDef htim3;
+//TIM_HandleTypeDef htim3;
 int action_counter = 1;
 int action_ticks = 0;
 
@@ -51,7 +51,7 @@ void my_timer_delay(int ticks){
 #endif
 
 }
-
+/*
 void TIM_Init_hal(void)
 {
 
@@ -83,7 +83,7 @@ void TIM_Init_hal(void)
   }
 }
 
-
+*/
 
 void TIM_Init_ll(void){
 	LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_TIM3);
@@ -105,13 +105,9 @@ void TIM_Init_cmsis(void){
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 	HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_8);
-
-	//HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_8);
-	//HAL_TIM_Base_Stop_IT(&htim3);
 }
 
 void HAL_SYSTICK_Callback(void){
-	//HAL_Delay(100);
 	HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_8);
 }
 

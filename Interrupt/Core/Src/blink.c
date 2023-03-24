@@ -22,5 +22,12 @@ void blink(GPIO_TypeDef * GPIOx, uint16_t GPIO_Pin, int ticks){
 #elif MODE_EXECUTE == 3
 	  my_timer_delay(ticks);
 
+#elif MODE_EXECUTE ==4
+	  led_on(GPIOx, GPIO_Pin);
+	  HAL_Delay(ticks);
+	  led_off(GPIOx, GPIO_Pin);
+	  HAL_Delay(ticks);
+
 #endif
 }
+
