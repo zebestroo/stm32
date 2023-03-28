@@ -1,6 +1,3 @@
-#include "semphr.h"
-
-
 /* Definitions for Blink */
 osThreadId_t BlinkHandle;
 const osThreadAttr_t Blink_attributes = {
@@ -10,4 +7,4 @@ const osThreadAttr_t Blink_attributes = {
 };
 
 
-void BlinkTask(SemaphoreHandle_t sema);
+void BlinkTask(void * parameter);

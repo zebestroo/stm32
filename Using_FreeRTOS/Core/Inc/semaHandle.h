@@ -1,4 +1,5 @@
+#include "FreeRTOS.h"
 #include "semphr.h"
 
 
-SemaphoreHandle_t semaHandle;
+extern SemaphoreHandle_t semaHandle;

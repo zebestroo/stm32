@@ -66,8 +66,8 @@ const osMessageQueueAttr_t StatusQueue_attributes = {
 
 void start_tasks(void){
 	semaHandle = xSemaphoreCreateBinary();
-	BlinkHandle = osThreadNew(BlinkTask, semaHandle, &Blink_attributes);
-	ListenButtonHandle = osThreadNew(LisBtn, semaHandle, &ListenButton_attributes);
+	BlinkHandle = osThreadNew(BlinkTask, &semaHandle, &Blink_attributes);
+	ListenButtonHandle = osThreadNew(LisBtn, &semaHandle, &ListenButton_attributes);
 	StatusQueueHandle = osMessageQueueNew (16, sizeof(uint16_t), &StatusQueue_attributes);
 
 }

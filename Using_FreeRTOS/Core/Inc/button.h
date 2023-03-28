@@ -1,6 +1,3 @@
-#include "semphr.h"
-
-
 /* Definitions for ListenButton */
 osThreadId_t ListenButtonHandle;
 const osThreadAttr_t ListenButton_attributes = {
@@ -9,4 +6,4 @@ const osThreadAttr_t ListenButton_attributes = {
   .priority = (osPriority_t) osPriorityNormal,
 };
 
-void LisBtn(SemaphoreHandle_t sema);
+void LisBtn(void * parameter);
