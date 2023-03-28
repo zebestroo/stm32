@@ -18,7 +18,7 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include "cmsis_os.h"
+//#include "freertos.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -41,25 +41,7 @@
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
-/* Definitions for Blink */
-osThreadId_t BlinkHandle;
-const osThreadAttr_t Blink_attributes = {
-  .name = "Blink",
-  .stack_size = 128 * 4,
-  .priority = (osPriority_t) osPriorityNormal,
-};
-/* Definitions for ListenButton */
-osThreadId_t ListenButtonHandle;
-const osThreadAttr_t ListenButton_attributes = {
-  .name = "ListenButton",
-  .stack_size = 128 * 4,
-  .priority = (osPriority_t) osPriorityNormal,
-};
-/* Definitions for StatusQueue */
-osMessageQueueId_t StatusQueueHandle;
-const osMessageQueueAttr_t StatusQueue_attributes = {
-  .name = "StatusQueue"
-};
+
 /* USER CODE BEGIN PV */
 
 /* USER CODE END PV */
@@ -67,8 +49,6 @@ const osMessageQueueAttr_t StatusQueue_attributes = {
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
-void BlinkTask(void *argument);
-void LisBtn(void *argument);
 
 /* USER CODE BEGIN PFP */
 
@@ -76,7 +56,7 @@ void LisBtn(void *argument);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-int status = 0;
+
 /* USER CODE END 0 */
 
 /**
@@ -112,7 +92,7 @@ int main(void)
   /* USER CODE END 2 */
 
   /* Init scheduler */
-  osKernelInitialize();
+  //osKernelInitialize();
 
   /* USER CODE BEGIN RTOS_MUTEX */
   /* add mutexes, ... */
@@ -128,18 +108,18 @@ int main(void)
 
   /* Create the queue(s) */
   /* creation of StatusQueue */
-  StatusQueueHandle = osMessageQueueNew (16, sizeof(uint16_t), &StatusQueue_attributes);
-
+  //start_tasks();
+  start_kernel();
   /* USER CODE BEGIN RTOS_QUEUES */
   /* add queues, ... */
   /* USER CODE END RTOS_QUEUES */
 
   /* Create the thread(s) */
   /* creation of Blink */
-  BlinkHandle = osThreadNew(BlinkTask, NULL, &Blink_attributes);
+
 
   /* creation of ListenButton */
-  ListenButtonHandle = osThreadNew(LisBtn, NULL, &ListenButton_attributes);
+
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
@@ -150,7 +130,7 @@ int main(void)
   /* USER CODE END RTOS_EVENTS */
 
   /* Start scheduler */
-  osKernelStart();
+  //osKernelStart();
   /* We should never get here as control is now taken by the scheduler */
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
@@ -239,51 +219,6 @@ static void MX_GPIO_Init(void)
 /* USER CODE BEGIN 4 */
 
 /* USER CODE END 4 */
-
-/* USER CODE BEGIN Header_BlinkTask */
-/**
-  * @brief  Function implementing the Blink thread.
-  * @param  argument: Not used
-  * @retval None
-  */
-/* USER CODE END Header_BlinkTask */
-void BlinkTask(void *argument)
-{
-  /* USER CODE BEGIN 5 */
-  /* Infinite loop */
-  for(;;)
-  {
-	  if(status){
-		  HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_8);
-		  osDelay(500);
-		  HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_8);
-		  osDelay(500);
-	  }
-  }
-  /* USER CODE END 5 */
-}
-
-/* USER CODE BEGIN Header_LisBtn */
-/**
-* @brief Function implementing the ListenButton thread.
-* @param argument: Not used
-* @retval None
-*/
-/* USER CODE END Header_LisBtn */
-void LisBtn(void *argument)
-{
-  /* USER CODE BEGIN LisBtn */
-  /* Infinite loop */
-  for(;;)
-  {
-	  if(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0)){
-		  HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_9);
-		  status = (status + 1) % 2;
-	  }
-	  osDelay(50);
-  }
-  /* USER CODE END LisBtn */
-}
 
 /**
   * @brief  Period elapsed callback in non blocking mode
