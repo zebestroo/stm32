@@ -3,47 +3,49 @@
 #include "semaHandle.h"
 
 
-
 /* USER CODE END Header_LisBtn */
 void LisBtn(void * parameter)
 {
   /* USER CODE BEGIN LisBtn */
   /* Infinite loop */
 	SemaphoreHandle_t * sem = parameter;
-	uint8_t button_click_accepted = 0;
 
-	uint8_t counter = 20;	// Define time (ms) of a button check
+	uint8_t button_state = 0;
+
 	for(;;)
 	{
 
-		if(is_button_pressed()){
-			button_click_accepted = 1;
-			uint8_t point_time = HAL_GetTick();
-			while(HAL_GetTick() - point_time <= counter){
-				if(!is_button_pressed()){
-					point_time = HAL_GetTick();
-					button_click_accepted = 0;
+		if(is_button_pressed() != button_state){
+			uint8_t counter = 5;
+			uint8_t toggle = 1;
+			while(counter){
+				if(is_button_pressed() == button_state){
+					toggle = 0;
 					break;
 				}
-			}
 
-			if(button_click_accepted){
+				osDelay(10);
+				counter--;
+			}
+			button_state = (button_state + 1) % 2;
+
+
+			if(button_state && toggle){
 				if(uxSemaphoreGetCount(*sem)){
-					HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_9);
+					//HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_9);
 					xSemaphoreTake(*sem, 1);
 				}
 				else{
-					HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_9);
+					//HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_9);
 					xSemaphoreGive(*sem);
 				}
 			}
+
 		}
 
-	  //osDelay(50);
 	}
   /* USER CODE END LisBtn */
 }
-
 
 int is_button_pressed(){
 	return HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0);
