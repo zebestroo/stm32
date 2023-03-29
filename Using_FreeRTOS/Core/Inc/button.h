@@ -7,3 +7,4 @@ const osThreadAttr_t ListenButton_attributes = {
 };
 
 void LisBtn(void * parameter);
+int is_button_pressed(void);
