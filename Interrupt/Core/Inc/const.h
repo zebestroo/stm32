@@ -6,7 +6,7 @@
  * 4 - TIM3 LL
  * 5 - TIM3 CMSIS
  */
-#define TIMER_MODE 5
-#define MODE_EXECUTE 4
+#define TIMER_MODE 0
+#define MODE_EXECUTE 1
 #define SYSTICK_PRESCALER 48000
 #define ACTION_TIMER = TIM3

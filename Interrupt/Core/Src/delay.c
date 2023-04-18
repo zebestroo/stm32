@@ -24,8 +24,8 @@ void my_timer_delay(int ticks){
 	HAL_Delay(ticks);
 
 #elif TIMER_MODE == 2
-	//HAL_SYSTICK_Config(HAL_RCC_GetHCLKFreq()/ticks);
-	SysTick->CTRL = SysTick->CTRL | SysTick_CTRL_TICKINT_Msk;
+	HAL_SYSTICK_Config(HAL_RCC_GetHCLKFreq()/ticks);
+	//SysTick->CTRL = SysTick->CTRL | SysTick_CTRL_TICKINT_Msk;
 	HAL_Delay(ticks);
 
 #elif TIMER_MODE == 3
