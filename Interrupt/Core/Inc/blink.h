@@ -20,3 +20,7 @@
 
 
 void blink(GPIO_TypeDef * GPIOx, uint16_t GPIO_Pin, int ticks);
+void blink_on_timer(void);
+void blink_timer_dec(void);
+void blink_timer_reload(void);
+uint32_t get_blink_ticks(void);

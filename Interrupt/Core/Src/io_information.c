@@ -20,6 +20,10 @@ void print_button_state(UART_HandleTypeDef huart, uint8_t set_button_status){
 	}
 }
 
+void print_blink_ticks(UART_HandleTypeDef huart, uint8_t ticks){
+	char message[] = "Tss";
+	HAL_UART_Transmit(&huart, message, sizeof(message), 100);
+}
 
 
 

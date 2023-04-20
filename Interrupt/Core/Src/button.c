@@ -2,9 +2,7 @@
 #include "io_information.h"
 #include "stm32f051x8.h"
 #include "stm32f0xx_hal.h"
-#include "stm32f0xx_hal_exti.h"
-
-#define ROW_DELAY 20
+#define ROW_DELAY 50
 #define ITERATIONS_NUMBER 5
 
 extern UART_HandleTypeDef huart1;
@@ -37,7 +35,6 @@ void button_handler(void){
 	else{
 		iter_counter = ITERATIONS_NUMBER;
 	}
-
 }
 
 
@@ -61,6 +58,23 @@ void count_timer_dec(void){
 
 int button_pressed(void){
 	return HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0);
+}
+
+void button_processing(void){
+	if(is_time_out()){
+		button_handler();
+		/*
+		if(button_action_status()){
+			HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_8);
+		}
+		*/
+
+		reload_timer();
+	}
+}
+
+uint32_t get_ticks_of_timer(void){
+	return count_timer;
 }
 
 

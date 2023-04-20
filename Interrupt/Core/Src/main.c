@@ -46,6 +46,7 @@ TIM_HandleTypeDef htim3;
 
 UART_HandleTypeDef huart1;
 
+
 /* USER CODE BEGIN PV */
 
 /* USER CODE END PV */
@@ -115,13 +116,9 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-	  if(is_time_out()){
-		  button_handler();
-		  if(button_action_status()){
-			  HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_8);
-		  }
-		  reload_timer();
-	  }
+	  blink_on_timer();
+	  button_processing();
+
     /* USER CODE BEGIN 3 */
   }
 

@@ -5,4 +5,5 @@ int is_time_out(void);
 void count_timer_dec(void);
 void change_button_action_status(void);
 int button_pressed(void);
+void button_processing(void);
 void USART1_Init(void);
